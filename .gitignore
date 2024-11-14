@@ -10,9 +10,9 @@ node_modules/
 .pnp/
 .pnp.js
 
-# Tailwind and PostCSS output files
-dist/
-*.css.map
+# # Tailwind and PostCSS output files
+# dist/
+# *.css.map
 
 # Optional npm cache
 .npm
