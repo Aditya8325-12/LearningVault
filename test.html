@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Vault</title>
+    <link href="../dist/output.css" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  </head>
+  <body>
+    <div class="fixed h-screen w-full select-none">
+      <!-- nav bar -->
+      <div class="flex h-16 w-full items-center justify-between bg-red-300 px-5 text-lg uppercase text-white">
+        <div class="flex gap-3">
+          <a href="/" class="cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg"  version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" x="0" y="0" viewBox="0 0 460.298 460.297" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M230.149 120.939 65.986 256.274c0 .191-.048.472-.144.855-.094.38-.144.656-.144.852v137.041c0 4.948 1.809 9.236 5.426 12.847 3.616 3.613 7.898 5.431 12.847 5.431h109.63V303.664h73.097v109.64h109.629c4.948 0 9.236-1.814 12.847-5.435 3.617-3.607 5.432-7.898 5.432-12.847V257.981c0-.76-.104-1.334-.288-1.707L230.149 120.939z" fill="#ffffff" opacity="1" data-original="#000000" class=""></path><path d="M457.122 225.438 394.6 173.476V56.989c0-2.663-.856-4.853-2.574-6.567-1.704-1.712-3.894-2.568-6.563-2.568h-54.816c-2.666 0-4.855.856-6.57 2.568-1.711 1.714-2.566 3.905-2.566 6.567v55.673l-69.662-58.245c-6.084-4.949-13.318-7.423-21.694-7.423-8.375 0-15.608 2.474-21.698 7.423L3.172 225.438c-1.903 1.52-2.946 3.566-3.14 6.136-.193 2.568.472 4.811 1.997 6.713l17.701 21.128c1.525 1.712 3.521 2.759 5.996 3.142 2.285.192 4.57-.476 6.855-1.998L230.149 95.817l197.57 164.741c1.526 1.328 3.521 1.991 5.996 1.991h.858c2.471-.376 4.463-1.43 5.996-3.138l17.703-21.125c1.522-1.906 2.189-4.145 1.991-6.716-.195-2.563-1.242-4.609-3.141-6.132z" fill="#ffffff" opacity="1" data-original="#000000" class=""></path></g></svg>  
+          </a>
+          <h1 id="course_name">Take a challenge</h1>
+        </div>
+          <svg xmlns="http://www.w3.org/2000/svg" class=" flex  cursor-pointer" id="toggleButton" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M21 6H3a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2zM15 11H3a1 1 0 1 0 0 2h12a1 1 0 1 0 0-2zM9 16H3a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2z" fill="#ffffff" opacity="1" data-original="#000000" class=""></path></g></svg>
+      </div>
+      <div class="flex h-full justify-end w-full">
+        
+        <!-- sidebar -->
+        <div id="sidebar" class="hidden fixed h-full lg:w-3/12 sm:6/12 w-10/12  flex-col bg-gray-100 px-3">
+          <div class="h-full overflow-y-auto border-r border-gray-200 bg-gray-100 px-3 py-5 ">
+            <ul id="sessions-list" class="flex flex-col gap-6 pb-36">
+              <!-- The dynamically generated sessions will be inserted here -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- main content -->
+        <div class="h-full w-full px-3 overflow-y-scroll pb-48  lg:pb-10  sm:px-6 py-10" onclick="closeSidebar()" style="background-image: url('https://erasvr8.mkcl.org/server/o/learnerClient/static/assets/qt/common/images/border.png'); background-repeat: no-repeat; background-position: center bottom; background-color: rgba(255, 255, 255, 0.85); background-blend-mode: lighten; background-size: 100% auto;">
+          
+
+          <div class="flex sm:hidden items-center justify-start gap-3">
+            <h1 class="py-4  sm:text-2xl text-xl">Question:</h1>
+            <input id="mobile-QuestionNo" aria-describedby="helper-text-explanation" class="block w-8 rounded-lg border border-gray-700 bg-gray-50 py-1 text-center text-xs text-gray-900 focus:border-blue-500 focus:ring-blue-500" value="1" />
+            <label for="number-input" class="block text-center text-base font-medium text-gray-900 ">of <span id="mobile-totalQuestions"> </span></label>
+          </div>
+
+
+          <h1 class="py-4 hidden sm:flex  sm:text-2xl text-xl">Question:</h1>
+
+
+          <h1 id="question-text" class="text-wrap sm:text-xl text-base"></h1>
+          <div class="my-10 w-full items-center">
+            <ul id="options-list" class="grid lg:grid-cols-2 grid-cols-1 gap-10 sm:p-6 lg:p-2"></ul>
+          </div>
+
+          <!-- buttons for xl screen -->
+          <div class="sm:flex hidden w-full items-center gap-6 sm:px-10 px-3">
+            <button type="button" id="prev-button" class="cursor-pointer rounded-lg border border-gray-200 bg-slate-500 px-8 py-2.5 text-sm font-medium text-white hover:bg-slate-800 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100">Back</button>
+            <div class="flex items-center gap-3">
+              <input id="QuestionNo" aria-describedby="helper-text-explanation" class="block w-16 rounded-lg border border-gray-700 bg-gray-50 py-1.5 text-center text-base text-gray-900 focus:border-blue-500 focus:ring-blue-500" value="1" />
+              <label for="number-input" class="block text-center text-base font-medium text-gray-900 ">of <span id="totalQuestions"> </span></label>
+            </div>
+            <button type="button" id="next-button" class="cursor-pointer rounded-lg bg-sky-600 px-8 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300">Next</button>
+            <button type="button" id="submit-btn" class="cursor-pointer rounded-lg bg-red-600 px-8 py-2.5 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300">Submit</button>
+          </div>
+
+          <!-- buttons for mobile screen -->
+          <div class="sm:hidden flex flex-col w-full gap-6 sm:px-10 px-3">
+            <!-- <div class="flex items-center justify-center gap-3">
+              <input id="mobile-QuestionNo" aria-describedby="helper-text-explanation" class="block w-16 rounded-lg border border-gray-700 bg-gray-50 py-1.5 text-center text-base text-gray-900 focus:border-blue-500 focus:ring-blue-500" value="1" />
+              <label for="number-input" class="block text-center text-base font-medium text-gray-900 ">of <span id="mobile-totalQuestions"> </span></label>
+            </div> -->
+            <div class="flex justify-between px-2">
+              <button type="button" id="mobile-prev-button" class="cursor-pointer rounded-lg border border-gray-200 bg-slate-500 px-6 py-2 text-xs font-medium text-white hover:bg-slate-800 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100">Back</button>
+              <button type="button" id="mobile-submit-btn" class="cursor-pointer rounded-lg bg-red-600 px-6 py-2 text-xs font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300">Submit</button>
+              <button type="button" id="mobile-next-button" class="cursor-pointer rounded-lg bg-sky-600 px-6 py-2 text-xs font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="functions.js"></script>
+  </body>
+</html>
